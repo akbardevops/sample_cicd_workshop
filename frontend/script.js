@@ -13,7 +13,7 @@ async function checkBackendHealth() {
     apiStatusVal.className = "stat-value";
     
     try {
-        const response = await fetch("http://localhost:5000/api/message");
+        const response = await fetch("http://18.140.244.5:5000/api/message");
         
         if (response.ok) {
             const data = await response.json();
