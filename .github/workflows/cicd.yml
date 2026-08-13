@@ -27,6 +27,13 @@ jobs:
          password: ${{ secrets.DOCKERPASSWORD }}
 
      - name: build backend docker image
-       run: docker build -t ${{ secrets.DOCKERUSERNAME }}/frontend:${{ github.sha }} ./backend
+       run: docker build -t ${{ secrets.DOCKERUSERNAME }}/backend:${{ github.sha }} ./backend
+     
+     - name: build frontend docker image
+       run: docker build -t ${{ secrets.DOCKERUSERNAME }}/frontend:${{ github.sha }} ./frontend
+
+     - name: check the docker images
+       run: docker images
+
       
 
