@@ -1,0 +1,31 @@
+name: Deploy application on docker container
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ci:
+    name: Continous Integration
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: checkout code
+       uses: actions/checkout@v4
+      
+     - name: install dependencies
+       run: |
+         cd ./backend
+         npm install
+
+     - name: login dockerhub
+       uses: actions/login-action@v3
+       with:
+         username: ${{ secrets.DOCKERUSERNAME }}
+         password: ${{ secrets.DOCKERPASSWORD }}
+
+     - name: build backend docker image
+       run: docker build -t ${{ secrets.DOCKERUSERNAME }}/frontend:${{ github.sha }} ./backend
+      
+
